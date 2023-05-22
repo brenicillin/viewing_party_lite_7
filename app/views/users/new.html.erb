@@ -3,9 +3,13 @@
 <section id="registration-form">
   <%= form_with url: users_path, method: :post, local: true do |form| %>
     <%= form.label :name, "Name" %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name %><br/>
     <%= form.label :email, "Email" %>
-    <%= form.text_field :email %>
+    <%= form.text_field :email %><br/>
+    <%= form.label :password, "Password" %>
+    <%= form.password_field :password %><br/>
+    <%= form.label :password_confirmation, "Confirm Password" %>
+    <%= form.password_field :password_confirmation %><br/>
     <%= form.submit "Register User" %>
   <% end %>
 </section>
