@@ -19,7 +19,7 @@ class UsersController < ApplicationController
         flash[:alert] = "Please fill in all fields. Email must be unique."
       end
     else
-      redirect_to "/register"
+      render :new
       flash[:alert] = "Passwords do not match."
     end
   end
@@ -28,13 +28,17 @@ class UsersController < ApplicationController
   end
 
   def login_user
-    user = User.find_by(email: params[:email])
-    if user.authenticate(params[:password])
-      redirect_to user_path(user)
-      flash[:notice] = "Welcome, #{user.name}! You are now logged in."
+    if user = User.find_by(email: params[:email])
+      if user.authenticate(params[:password])
+        redirect_to user_path(user)
+        flash[:notice] = "Welcome, #{user.name}! You are now logged in."
+      else
+        redirect_to "/login"
+        flash[:alert] = "Incorrect email/password combination."
+      end
     else
       redirect_to "/login"
-      flash[:alert] = "Incorrect email/password combination."
+      flash[:alert] = "A user with this email does not exist."
     end
   end
 
