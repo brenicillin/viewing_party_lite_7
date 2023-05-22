@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "movie results page", type: :feature do
   before(:each) do
-    @user1 = User.create!(name: "Bob", email: "bob@bob.com")
-    @user2 = User.create!(name: "John", email: "john@bob.com")
+    @user1 = User.create!(name: "Bob", email: "bob@bob.com", password: "password")
+    @user2 = User.create!(name: "John", email: "john@bob.com", password: "password")
     visit user_discover_path(@user1)
     stub_request(:get, "https://api.themoviedb.org/3/movie/top_rated?api_key=#{ENV['MOVIE_API_KEY']}")
       .to_return(status: 200, body: File.read("./spec/fixtures/top_rated_movies.json"))

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Movie Show Page" do
   before(:each) do
-    @user = User.create!(name: "Bob", email: "bob@bob.com")
+    @user = User.create!(name: "Bob", email: "bob@bob.com", password: "password")
     
     stub_request(:get, "https://api.themoviedb.org/3/movie/5?api_key=#{ENV['MOVIE_API_KEY']}")
     .to_return(status: 200, body: File.read("./spec/fixtures/four_rooms_info.json"))
