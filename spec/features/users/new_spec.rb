@@ -42,7 +42,6 @@ RSpec.describe "User Registration Page", type: :feature do
       fill_in "Confirm Password", with: "password123"
       click_button "Register User"
       
-      save_and_open_page
       expect(current_path).to eq("/users/#{User.last.id}")
       
     end
