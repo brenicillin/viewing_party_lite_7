@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "User Dashboard", type: :feature do
 
   before(:each) do
-    @user1 = User.create!(name: "Bob", email: "bob@bob.com")
-    @user2 = User.create!(name: "John", email: "john@john.com")
+    @user1 = User.create!(name: "Bob", email: "bob@bob.com", password: "password")
+    @user2 = User.create!(name: "John", email: "john@john.com", password: "password")
 
     @viewing1 = ViewingParty.create!(duration: 1, date: Date.current, time: Time.current, movie_id: 5)
     @viewing1.users = [@user1, @user2]

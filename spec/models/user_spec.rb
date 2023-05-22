@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   before(:each) do
-    @user_1 = User.create!(name: "Bob", email: "bobert@bob.com")
-    @user_2 = User.create!(name: "Jeff", email: "jefferey@bob.com")
-    @user_3 = User.create!(name: "Sally", email: "sally@bob.com")
+    @user_1 = User.create!(name: "Bob", email: "bobert@bob.com", password: 'password123')
+    @user_2 = User.create!(name: "Jeff", email: "jefferey@bob.com", password: 'password123')
+    @user_3 = User.create!(name: "Sally", email: "sally@bob.com", password: 'password123')
 
     @viewing_party_1 = ViewingParty.create!(duration: 1, date: Date.current, time: Time.current, movie_id: 5)
 
@@ -21,6 +21,16 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:email) }
     it { should validate_uniqueness_of(:email) }
     it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:password)}
+    it { should have_secure_password }
+    it 'should have secure password' do
+      expect(@user_1).to_not have_attribute(:password)
+      expect(@user_1.password_digest).to_not eq('password123')
+    end
+  end
+
+  describe 'authentication' do
+
   end
 
   describe 'instance methods' do
