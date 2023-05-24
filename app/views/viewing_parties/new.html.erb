@@ -1,6 +1,6 @@
 <h1> <%= @movie.title %> Viewing Party </h1>
 
-<%= form_with model: @party, url: user_movie_viewing_parties_path do |form| %>
+<%= form_with model: @party, url: movie_viewing_parties_path do |form| %>
   <%= form.label :duration %>
   <%= form.number_field :duration, min: @movie.runtime, max: 999, value: @movie.runtime %> min
   <br>

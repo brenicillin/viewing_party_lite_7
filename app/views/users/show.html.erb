@@ -1,14 +1,14 @@
 <h1> <%= @user.name %>'s Dashboard  </h1>
 
 <section id="discover-movies">
-<%= button_to "Discover Movies", user_discover_path(@user), {method: "get"} %>
+<%= button_to "Discover Movies", discover_path, {method: "get"} %>
 </section>
 
 <ul id="invited-parties">
   <h3> Parties I am Invited To </h3>
   <% @invited_parties.each do |party| %>
     <%= image_tag "https://image.tmdb.org/t/p/w500#{party.get_image}" %>
-    <li><%= link_to "#{party.movie_title}", user_movie_path(@user, party.movie_id) %></li>
+    <li><%= link_to "#{party.movie_title}", movie_path(party.movie_id) %></li>
     <li><%= (party.date).strftime("%A, %B %d, %Y") %></li>
     <li><%= (party.time).strftime("%I:%M%p") %></li>
     <% party.users.each do |user| %>
@@ -25,7 +25,7 @@
   <h3> Parties I am Hosting </h3>
   <% @hosted_parties.each do |party| %>
       <%= image_tag "https://image.tmdb.org/t/p/w500#{party.get_image}" %>
-    <li><%= link_to "#{party.movie_title}", user_movie_path(@user, party.movie_id) %></li>
+    <li><%= link_to "#{party.movie_title}", movie_path(party.movie_id) %></li>
     <li><%= (party.date).strftime("%A, %B %d, %Y") %></li>
     <li><%= (party.time).strftime("%I:%M %p") %></li>
     <% party.users.each do |user| %>

@@ -1,7 +1,7 @@
 <h1><%= @movie.title %></h1>
 
-<%= button_to "Back", user_discover_path(@user), method: :get %>
-<%= button_to "Create a Viewing Party", new_user_movie_viewing_party_path(@user, @movie.id), method: :get %>
+<%= button_to "Back", discover_path(@user), method: :get %>
+<%= button_to "Create a Viewing Party", new_movie_viewing_party_path(@user, @movie.id), method: :get %>
 
 <section id="movie-info">
   <h2>Movie Info</h2>

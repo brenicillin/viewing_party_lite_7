@@ -1,8 +1,8 @@
 <h1> Discover Movies </h2>
-  <%= button_to "Back", user_discover_path(@user), method: :get %>
+  <%= button_to "Back", discover_path, method: :get %>
 <ul>
   <% @movies.each do |movie| %>
-    <li>Movie Title: <%= link_to "#{movie.title}", user_movie_path(@user, movie.id) %></li>
+    <li>Movie Title: <%= link_to "#{movie.title}", movie_path(movie.id) %></li>
     <li>Rating: <%= movie.rating %></li> <br>
   <% end %>
 </ul>
