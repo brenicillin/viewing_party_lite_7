@@ -6,6 +6,11 @@ RSpec.describe "Landing page", type: :feature do
     @user1 = User.create!(name: "Bob", email: "bob@bob.com", password: "password")
     @user2 = User.create!(name: "John", email: "john@john.com", password: "password")
     @user3 = User.create!(name: "Jack", email: "Jack@jack.com", password: "password")
+    visit new_session_path
+    fill_in :email, with: @user1.email
+    fill_in :password, with: @user1.password
+    click_button "Log In"
+
     visit '/'
   end
 
@@ -37,6 +42,39 @@ RSpec.describe "Landing page", type: :feature do
       expect(page).to have_link("Home")
       click_link "Home"
       expect(current_path).to eq(root_path)
+    end
+  end
+
+# As a logged in user 
+# When I visit the landing page
+# I no longer see a link to Log In or Register
+# But I see a link to Log Out.
+# When I click the link to Log Out
+# I'm taken to the landing page
+# And I can see that the Log Out link has changed back to a Log In link
+
+  describe 'When I am logged in' do
+    it "I no longer see a link to Log In or Register but I see a link to Log Out" do
+      visit new_session_path
+
+      fill_in :email, with: @user1.email
+      fill_in :password, with: @user1.password
+
+      click_button "Log In"
+
+      visit '/'
+
+      expect(page).to_not have_button("Log In")
+      expect(page).to_not have_button("Register")
+      expect(page).to have_button("Log Out")
+
+      expect(page).to have_content("Welcome, Bob!")
+
+      click_button "Log Out"
+
+      expect(current_path).to eq(root_path)
+      expect(page).to have_button("Log In")
+      expect(page).to have_button("Register")
     end
   end
 end
