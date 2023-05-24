@@ -8,7 +8,7 @@ class ViewingPartiesController < ApplicationController
       @party = ViewingParty.new
     else
       flash[:alert] = "Please log in to view this page."
-      redirect_to root_path
+      redirect_to movie_path(@movie)
     end
   end
 

@@ -21,8 +21,9 @@ class MoviesController < ApplicationController
       @cast = MovieFacade.cast(params[:id])
       @reviews = MovieFacade.reviews(params[:id])
     else
-      flash[:alert] = "Please log in to view this page."
-      redirect_to root_path
+      @movie = MovieFacade.movie_details(params[:id])
+      @cast = MovieFacade.cast(params[:id])
+      @reviews = MovieFacade.reviews(params[:id])
     end
   end
 end
